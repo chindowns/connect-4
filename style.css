@@ -1,0 +1,24 @@
+body{
+    color: white
+}
+
+.red{
+    color: red
+}
+
+.white{
+    color: white;
+    border: solid 2px grey;
+}
+
+.black{
+    color: black
+}
+
+td{
+    border: solid 1px black;
+}
+
+#board{
+    background-color: #E3CF57
+}
