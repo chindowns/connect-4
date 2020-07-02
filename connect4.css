@@ -69,14 +69,14 @@ header>h1 {
     padding: 0px;
 }
 
-td{
-    border: solid 1px khaki;
+td th{
+    border: solid 2px khaki;
 }
+
 
 #board{
     background-color: khaki;
     border-collapse: collapse;
     margin: 25px auto;
-
 }
 
