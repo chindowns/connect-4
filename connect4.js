@@ -22,7 +22,6 @@ $(document).ready(function () {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-
     // Creates the Scoreboard and placement of the gameboard
     function setupDOM() {
         const header = `<header><h1>Connect 4</h1></header>`;
@@ -44,168 +43,16 @@ $(document).ready(function () {
 
         $("body").prepend(header, scoreBoard, gameBoard);
 
-    }
-
-
-    function dropDisk(column, color) {
-        let spotRow = findLowestRow(column)
-        console.log(spotRow);
-
-        // Animate disk drop with setInterval
-        const setSpot = (row) => {
-            $(`#${row}-${column}`).addClass(color);
-        }
-    
-        const removeSpot = (row) => {
-            $(`#${row}-${column}`).removeClass(color);
-        }
-    
-        for (let row = 0; row <= spotRow; row++) {
-            setTimeout(function() {
-                console.log(row)
-                if(row > 0) {
-                    removeSpot(row-1)
-                    setSpot(row)
-                }
-
-                // Next Move delayed until after the disc is dropped
-                if(row === spotRow){
-                    nextMove();
-                }
-
-            },row*250);
-        }
-
-
-        // $(`#${spotRow}-${column}`).addClass(color)
-        // board[spotRow][column] = color
-        // nextMove()
-
-    }
-
-    function findLowestRow(column) {
-        for (let row = board.length - 1; row >= 0; row--) {
-            if (board[row][column] === "") {
-                console.log(`row: ${row}  col: ${column}`)
-                return row
-            }
-        }
-        console.log("Column is FULL")
-        return "full"
-
-    }
-
-    function computerRandomDrop() {
-        let column = Math.floor(Math.random() * 7)
-        if (findLowestRow(column) != "full") {
-            return dropDisk(column, currentPlayer)
-        }
-        else {
-            // return computerRandomDrop()
-        }
-    }
-
-    function aiDrop() {
-        // check if opponent has 2 discs next to each other.  Drop to block one side.
-        
-
-        // check if opponent has 3 discs next to each other.  Drop to block.
-
-
-        // if opponent has 3 discs next to each other and open on both sides. 
-        // GAME OVER
-    }
-
-    function nextMove() {
-        if (currentPlayer === player1) {
-            currentPlayer = player2;
-            $('#whoseTurn').removeClass(player1);
-            $('#whoseTurn').text(player2);
-            $('#whoseTurn').addClass(player2);
-            computerRandomDrop()
-
-        }
-        else {
-            currentPlayer = player1;
-            $('#whoseTurn').removeClass(player2);
-            $('#whoseTurn').addClass(player1);
-            $('#whoseTurn').text(player1);
-        }
-        console.log(checkRowWin());
-    }
-
-    function checkWin() {
-        board.forEach(row => {
-            for (let i = 0; i < 4; i++) {
-                if (row[i] !== "" && 
-                    row[i] === row[i + 1] && 
-                    row[i] === row[i + 2] && 
-                    row[i] === row[i + 3]) {
-
-                    $(`#${scoreBoard}`).innerHTML(`<h2>Winner</h2><br />capitalizeFirstLetter(${row[i]})`)
-
-                }
-            }
-        })
-
-        for(let r = 0; r < board.length; r++) {
-            for (let c = 0; c < board[r].length; c++){
-                if (board[r][c] !== "" && 
-                    board[r][c] === board[r+1][c] && 
-                    board[r+1][c] === board[r+2][c] && 
-                    board[r+2][c] === board[r+3][c]) {
-
-                        $(`#${scoreBoard}`).innerHTML(`<h2>Winner</h2><br />capitalizeFirstLetter(${row[i]})`)
-
-                }
-            }
-        }
-
-        for(let r = 0; r < board.length; r++) {
-            for (let c = 0; c < board[r].length; c++){
-                if (board[r][c] !== "" && 
-                    board[r][c] === board[r+1][c] && 
-                    board[r+1][c] === board[r+2][c] && 
-                    board[r+2][c] === board[r+3][c]) {
-
-                        $(`#${scoreBoard}`).innerHTML(`<h2>Winner</h2><br />capitalizeFirstLetter(${row[i]})`)
-
-                }
-            }
-        }
-
-
-
-
-    }
-
-    function checkColWin() {
-        let outcoume=false;
-    }
-
-
-    $(document).on("click", ".drop-zone", (event) => {
-        event.preventDefault();
-        if (currentPlayer === player1) {
-            let id = event.target.id
-            let color = currentPlayer;
-            dropDisk(id, color)
-        }
-        else {
-            alert("It's not your turn!!")
-        }
-    })
-
-    function createBoard() {
         let boardHeader = `<thead>
-            <th id="0" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
-            <th id="1" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
-            <th id="2" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
-            <th id="3" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
-            <th id="4" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
-            <th id="5" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
-            <th id="6" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="0" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="1" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="2" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="3" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="4" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="5" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="6" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
         </thead>`
+
         $("#board").append(boardHeader)
 
         board.forEach((row, i) => {
@@ -223,10 +70,176 @@ $(document).ready(function () {
         })
     }
 
+    $(document).on("click", ".drop-zone", (event) => {
+        event.preventDefault();
+        if (currentPlayer === player1) {
+            let id = event.target.id;
+            let color = currentPlayer;
+            dropDisk(id, color)
+        }
+        else {
+            alert("It's not your turn!!")
+        }
+    })
+
+    function dropDisk(column, color) {
+        let lowestRow = findLowestRow(column)
+        console.log(lowestRow)
+
+        // Animate disk drop with setInterval
+        const setSpot = (row) => {
+            $(`#${row}-${column}`).addClass(color);
+        }
+
+        const removeSpot = (row) => {
+            $(`#${row}-${column}`).removeClass(color);
+        }
+
+        console.log(`Drop Disc LowestRow is ${lowestRow}`);
+
+        for (let row = 0; row <= lowestRow; row++) {
+            setTimeout(function () {
+                console.log(`Dropped Row is: ${row}`)
+                if (row > 0) {
+                    removeSpot(row - 1);
+                    setSpot(row);
+                    // Disc at lowestRow, check if there is a winner
+                } else { 
+                    console.log(`Set top spot`); 
+                    setSpot(row); 
+                }
+
+                if (row === lowestRow) {
+                    console.log(`Checking if there is a  Winner`);
+                    board[lowestRow][column] = color;
+                    checkWin();
+                    // Set the first spot
+                }
+
+            }, (row * 250) - row);
+        }
+
+        // $(`#${lowestRow}-${column}`).addClass(color)
+        // board[lowestRow][column] = color
+        // nextMove()
+
+    }
+
+    function findLowestRow(column) {
+        console.log(board);
+        for (let row = board.length - 1; row >= 0; row--) {
+            if (board[row][column] === "") {
+                console.log(`row: ${row}  col: ${column}`);
+                return row
+            }
+        }
+        console.log("Column is FULL")
+        return "full"
+
+    }
+
+    function computerRandomDrop() {
+        let column = Math.floor(Math.random() * 6)
+        if (findLowestRow(column) != "full") {
+            return dropDisk(column, currentPlayer)
+        }
+        else {
+            // return computerRandomDrop()
+        }
+    }
+
+    function nextMove() {
+        if (currentPlayer === player1) {
+            currentPlayer = player2;
+            $('#whoseTurn').removeClass(player1);
+            $('#whoseTurn').text(player2);
+            $('#whoseTurn').addClass(player2);
+            computerRandomDrop()
+
+        }
+        else {
+            currentPlayer = player1;
+            $('#whoseTurn').removeClass(player2);
+            $('#whoseTurn').addClass(player1);
+            $('#whoseTurn').text(player1);
+        }
+    }
+
+    function checkWin() {
+        let playNextMove = 0
+        // Check Rows
+        board.forEach(row => {
+            for (let col = 0; col < 4; col++) {
+                if (row[col] !== "" &&
+                    row[col] === row[col + 1] &&
+                    row[col] === row[col + 2] &&
+                    row[col] === row[col + 3]) {
+                    
+                    console.log(`${row[col]} WINS`)
+                    $(`#scoreBoard`).html("<h2>Winner</h2><br />"+capitalizeFirstLetter(row[col]))
+                    return playNextMove = 0
+                }
+                else {playNextMove++}
+            }
+        });
+        
+
+        // Check Columns
+        for (let row = board.length-1; row >= 0; row--) {
+            for (let col = 0; col < board[row].length; col++) {
+                if (board[row][col] !== "" &&
+                    board[row][col] === board[row - 1][col] &&
+                    board[row][col] === board[row - 2][col] &&
+                    board[row][col] === board[row - 3][col]) {
+
+                    console.log(`${board[row][col]} WINS`)
+                    $(`#scoreBoard`).html("<h2>Winner</h2><br />" + capitalizeFirstLetter(board[row][col]))
+                    return playNextMove = 0
+                }
+            }
+        }
+        playNextMove++
+
+        // Check Diagonal Up Right
+        for (let row = board.length-1; row > 1; row--) {
+            for (let col = 0; col < board[row].length; col++) {
+                if (board[row][col] !== "" &&
+                    board[row][col] === board[row - 1][col + 1] &&
+                    board[row - 1][col + 1] === board[row - 2][col + 2] &&
+                    board[row - 2][col + 2] === board[row - 3][col + 3]) {
+
+                    console.log(`${board[row]} WINS`)
+                    $(`#scoreBoard`).html("<h2>Winner</h2><br />" + capitalizeFirstLetter(board[row][col]))
+                    return playNextMove = 0
+
+                } else {playNextMove++}
+            }
+        }
+        
+
+        // Check Diangonal Up Left
+        for (let row = board.length-1; row > 1; row--) {
+            for (let col = board[row].length - 1; col >= 0 ; col--) {
+                if (board[row][col] !== "" &&
+                    board[row][col] === board[row - 1][col - 1] &&
+                    board[row - 1][col - 1] === board[row - 2][col - 2] &&
+                    board[row - 2][col - 2] === board[row - 3][col - 3]) {
+
+                    console.log(`${board[row]} WINS`)
+                    $(`#scoreBoard`).html("<h2>Winner</h2><br />" + capitalizeFirstLetter(board[row][col]))
+                    return playNextMove = 0
+                }
+                else {playNextMove++}
+            }
+        }
+        
+        console.log(playNextMove);
+        if (playNextMove === 81) {
+            nextMove();
+        }
+    }
+
     setupDOM();
-    createBoard();
-
-
 })
 
 
