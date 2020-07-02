@@ -1,10 +1,12 @@
 body{
     color: white;
 font-family: 'Arvo', serif;
+background-image: url("./greenFelt.jpeg");
+background-size: 1400px;
 }
 
 .red{
-    color: red;
+    color: crimson;
 }
 
 .white{
@@ -17,7 +19,8 @@ font-family: 'Arvo', serif;
 }
 
 .yellow {
-    color:  #E3CF57;
+    color: khaki;
+    /* color:  #E3CF57; */
 }
 
 header>h1 {
@@ -25,8 +28,9 @@ header>h1 {
     font-size: 50px;
     font-weight: 700;
     color: black;
-    margin: 10px auto;
+    margin: auto;
     padding: 30px auto;
+    font-family: 'Righteous', cursive;
 }
 
 #scoreBoard {
@@ -34,24 +38,43 @@ header>h1 {
     max-width: 375px;
     align-items: center;
     flex-flow: row;
-    margin: 10px auto;
-    color: blueviolet;
+    margin: auto;
+}
+
+.score {
+    flex-basis: 30%;
+    width: 112px;
+    font-size: 20px;
+    font-weight: 300px;
+    text-align: center;
 }
 
 .player {
-    flex-basis: 33.3%;
-    width: 125px;
+    flex-basis: 40%;
+    width: 151px;
     font-size: 30px;
     font-weight: 400;
     text-align: center;
 }
 
+.winner {
+    flex-basis: 40%;
+    width: 151px;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    color: violet;
+    font-family: 'Righteous', cursive;
+    margin: auto;
+    padding: 0px;
+}
+
 td{
-    border: solid 1px #E3CF57;
+    border: solid 1px khaki;
 }
 
 #board{
-    background-color: #E3CF57;
+    background-color: khaki;
     border-collapse: collapse;
     margin: 25px auto;
 

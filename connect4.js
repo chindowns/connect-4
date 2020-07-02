@@ -29,14 +29,14 @@ $(document).ready(function () {
         const player2Title = capitalizeFirstLetter(player2);
         const scoreBoard = `
             <div class="scoreBoard" id="scoreBoard">
-                <div class="player ${player1}" id="player1">${player1Title}<br />
-                    <div class="player black" id="player1Score">0</div>
+                <div class="score ${player1}" id="player1">${player1Title}<br />
+                    <div class="score black" id="player1Score">0</div>
                 </div>
                 <div class="player yellow" id="whosePlay">Play<br />
-                    <div class="player ${currentPlayer}" id="whoseTurn">${currentPlayer}</div>
+                    <div class="player ${currentPlayer}" id="whoseTurn">${capitalizeFirstLetter(currentPlayer)}</div>
                 </div>
-                <div class="player ${player2}" id="player2">${player2Title}<br />
-                    <div class="player black" id="player2Score">0</div>
+                <div class="score ${player2}" id="player2">${player2Title}<br />
+                    <div class="score black" id="player2Score">0</div>
                 </div>
             </div>`
         const gameBoard = `<table id="board"></table>`
@@ -44,26 +44,26 @@ $(document).ready(function () {
         $("body").prepend(header, scoreBoard, gameBoard);
 
         let boardHeader = `<thead>
-            <th id="0" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
-            <th id="1" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
-            <th id="2" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
-            <th id="3" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
-            <th id="4" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
-            <th id="5" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
-            <th id="6" class="drop-zone"><i class="fas fa-arrow-alt-circle-down drop-zone"></i></th>
+            <th id="0" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="1" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="2" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="3" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="4" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="5" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
+            <th id="6" class="drop-zone"><i class="fas fa-arrow-alt-circle-down"></i></th>
         </thead>`
 
         $("#board").append(boardHeader)
 
         board.forEach((row, i) => {
             let rowVal = `<tr>
-                <td id="${i}-0" data-col="0"> <i class="fas fa-circle fa-5x ${row[0]}"></i></td>
-                <td id="${i}-1" data-col="1"> <i class="fas fa-circle fa-5x ${row[1]}"></i></td>
-                <td id="${i}-2" data-col="2"> <i class="fas fa-circle fa-5x ${row[2]}"></i></td>
-                <td id="${i}-3" data-col="3"> <i class="fas fa-circle fa-5x ${row[3]}"></i></td>
-                <td id="${i}-4" data-col="4"> <i class="fas fa-circle fa-5x ${row[4]}"></i></td>
-                <td id="${i}-5" data-col="5"> <i class="fas fa-circle fa-5x ${row[5]}"></i></td>
-                <td id="${i}-6" data-col="6"> <i class="fas fa-circle fa-5x ${row[6]}"></i></td>
+                <td id="${i}-0" data-col="0"> <i class="fas fa-circle fa-5x "></i></td>
+                <td id="${i}-1" data-col="1"> <i class="fas fa-circle fa-5x "></i></td>
+                <td id="${i}-2" data-col="2"> <i class="fas fa-circle fa-5x "></i></td>
+                <td id="${i}-3" data-col="3"> <i class="fas fa-circle fa-5x "></i></td>
+                <td id="${i}-4" data-col="4"> <i class="fas fa-circle fa-5x "></i></td>
+                <td id="${i}-5" data-col="5"> <i class="fas fa-circle fa-5x "></i></td>
+                <td id="${i}-6" data-col="6"> <i class="fas fa-circle fa-5x "></i></td>
             </tr>`
 
             $("#board").append(rowVal)
@@ -167,6 +167,8 @@ $(document).ready(function () {
 
     function checkWin() {
         let playNextMove = 0
+        let resetWhosePlay = `<div class="winner ${currentPlayer}" id="whoseTurn">${currentPlayer}</div>`;
+        let winner = "";
         // Check Rows
         board.forEach(row => {
             for (let col = 0; col < 4; col++) {
@@ -176,7 +178,7 @@ $(document).ready(function () {
                     row[col] === row[col + 3]) {
                     
                     console.log(`${row[col]} WINS`)
-                    $(`#scoreBoard`).html("<h2>Winner</h2><br />"+capitalizeFirstLetter(row[col]))
+                    $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(row[col]) +"</h2>")
                     return playNextMove = 0
                 }
                 else {playNextMove++}
@@ -193,7 +195,7 @@ $(document).ready(function () {
                     board[row][col] === board[row - 3][col]) {
 
                     console.log(`${board[row][col]} WINS`)
-                    $(`#scoreBoard`).html("<h2>Winner</h2><br />" + capitalizeFirstLetter(board[row][col]))
+                    $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>")
                     return playNextMove = 0
                 }
             }
@@ -209,7 +211,7 @@ $(document).ready(function () {
                     board[row - 2][col + 2] === board[row - 3][col + 3]) {
 
                     console.log(`${board[row]} WINS`)
-                    $(`#scoreBoard`).html("<h2>Winner</h2><br />" + capitalizeFirstLetter(board[row][col]))
+                    $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>")
                     return playNextMove = 0
 
                 } else {playNextMove++}
@@ -226,7 +228,7 @@ $(document).ready(function () {
                     board[row - 2][col - 2] === board[row - 3][col - 3]) {
 
                     console.log(`${board[row]} WINS`)
-                    $(`#scoreBoard`).html("<h2>Winner</h2><br />" + capitalizeFirstLetter(board[row][col]))
+                    $(`#whosePlay`).html("<h2 class='player'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>")
                     return playNextMove = 0
                 }
                 else {playNextMove++}
