@@ -13,10 +13,8 @@ $(document).ready(function () {
     let player2 = "red"
     let currentPlayer = player1
 
-
     function dropDisk(column, color) {
         let placement = findLowestRow(column)
-
        
         // if we want to do animation, we can add from element 0 to placement
         // for (let i = 0; i < placement; i++) {

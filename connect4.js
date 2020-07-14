@@ -112,7 +112,7 @@ $(document).ready(function () {
                 if (row === lowestRow) {
                     console.log(`Checking if there is a  Winner`);
                     board[lowestRow][column] = color;
-                    checkWin();
+                    checkWin(row, column);
                     // Set the first spot
                 }
 
@@ -165,26 +165,40 @@ $(document).ready(function () {
         }
     }
 
-    function checkWin() {
+    function checkWin(row, col) {
         let playNextMove = 0
         let resetWhosePlay = `<div class="winner ${currentPlayer}" id="whoseTurn">${currentPlayer}</div>`;
-        let winner = "";
+        let winner = "<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>";
+        let count = 0;
+        let r = 0;
+        let c = 0;
+
         // Check Rows
-        board.forEach(row => {
-            for (let col = 0; col < 4; col++) {
-                if (row[col] !== "" &&
-                    row[col] === row[col + 1] &&
-                    row[col] === row[col + 2] &&
-                    row[col] === row[col + 3]) {
-                    
-                    console.log(`${row[col]} WINS`)
-                    $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(row[col]) +"</h2>")
-                    return playNextMove = 0
+        for (; c < board[row].length; c++) {
+            if (board[row][c] !== "" && board[row][c] === board[row][c + 1]) {
+                count++;
+                if (count === 3) {
+                    $('#whosePlay').html(winner);
+                    playNextMove = 0;
+                    break;
                 }
-                else {playNextMove++}
-            }
-        });
-        
+            } else {count === 0}
+        }
+        playNextMove++
+
+        //     for (let col = 0; col < 4; col++) {
+        //         if (row[col] !== "" &&
+        //             row[col] === row[col + 1] &&
+        //             row[col] === row[col + 2] &&
+        //             row[col] === row[col + 3]) {
+                    
+        //             console.log(`${row[col]} WINS`)
+        //             $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(row[col]) +"</h2>")
+        //             return playNextMove = 0
+        //         }
+        //         else {playNextMove++}
+        //     }
+        // });
 
         // Check Columns
         for (let row = board.length-1; row >= 0; row--) {
@@ -236,7 +250,7 @@ $(document).ready(function () {
         }
         
         console.log(playNextMove);
-        if (playNextMove === 81) {
+        if (playNextMove === 58) {
             nextMove();
         }
     }
