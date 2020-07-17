@@ -59,7 +59,7 @@ $(document).ready(function () {
         else{
             currentPlayer = player1
         }
-        console.log(checkRowWin())
+        // console.log(checkRowWin())
 
     }
 

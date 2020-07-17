@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     function dropDisk(column, color) {
         let lowestRow = findLowestRow(column)
-        console.log(lowestRow)
+        // console.log(lowestRow)
 
         // Animate disk drop with setInterval
         const setSpot = (row) => {
@@ -95,22 +95,22 @@ $(document).ready(function () {
             $(`#${row}-${column}`).removeClass(color);
         }
 
-        console.log(`Drop Disc LowestRow is ${lowestRow}`);
+        // console.log(`Drop Disc LowestRow is ${lowestRow}`);
 
         for (let row = 0; row <= lowestRow; row++) {
             setTimeout(function () {
-                console.log(`Dropped Row is: ${row}`)
+                // console.log(`Dropped Row is: ${row}`)
                 if (row > 0) {
                     removeSpot(row - 1);
                     setSpot(row);
                     // Disc at lowestRow, check if there is a winner
                 } else { 
-                    console.log(`Set top spot`); 
+                    // console.log(`Set top spot`); 
                     setSpot(row); 
                 }
 
                 if (row === lowestRow) {
-                    console.log(`Checking if there is a  Winner`);
+                    // console.log(`Checking if there is a  Winner`);
                     board[lowestRow][column] = color;
                     checkWin(row, column);
                     // Set the first spot
@@ -126,10 +126,10 @@ $(document).ready(function () {
     }
 
     function findLowestRow(column) {
-        console.log(board);
+        // console.log(board);
         for (let row = board.length - 1; row >= 0; row--) {
             if (board[row][column] === "") {
-                console.log(`row: ${row}  col: ${column}`);
+                // console.log(`row: ${row}  col: ${column}`);
                 return row
             }
         }
@@ -208,7 +208,7 @@ $(document).ready(function () {
                     board[row][col] === board[row - 2][col] &&
                     board[row][col] === board[row - 3][col]) {
 
-                    console.log(`${board[row][col]} WINS`)
+                    // console.log(`${board[row][col]} WINS`)
                     $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>")
                     return playNextMove = 0
                 }
@@ -224,7 +224,7 @@ $(document).ready(function () {
                     board[row - 1][col + 1] === board[row - 2][col + 2] &&
                     board[row - 2][col + 2] === board[row - 3][col + 3]) {
 
-                    console.log(`${board[row]} WINS`)
+                    // console.log(`${board[row]} WINS`)
                     $(`#whosePlay`).html("<h2 class='winner'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>")
                     return playNextMove = 0
 
@@ -241,7 +241,7 @@ $(document).ready(function () {
                     board[row - 1][col - 1] === board[row - 2][col - 2] &&
                     board[row - 2][col - 2] === board[row - 3][col - 3]) {
 
-                    console.log(`${board[row]} WINS`)
+                    // console.log(`${board[row]} WINS`)
                     $(`#whosePlay`).html("<h2 class='player'>Winner<br />" + capitalizeFirstLetter(board[row][col]) + "</h2>")
                     return playNextMove = 0
                 }
@@ -249,7 +249,7 @@ $(document).ready(function () {
             }
         }
         
-        console.log(playNextMove);
+        // console.log(playNextMove);
         if (playNextMove === 58) {
             nextMove();
         }
